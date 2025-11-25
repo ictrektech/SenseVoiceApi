@@ -1,0 +1,23 @@
+FROM swr.cn-southwest-2.myhuaweicloud.com/ictrek/pytorch_py312:arm_latest
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+
+RUN apt-get update && apt-get install -y git ffmpeg libglib2.0-0 libsm6 libxrender1 libxext6
+
+WORKDIR /root
+
+COPY *.txt /root/
+
+RUN pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple
+RUN pip3 config set install.trusted-host mirrors.aliyun.com
+RUN pip3 install -r req.txt -c constraints.txt
+
+COPY *.py /root/
+
+# 默认启动 Manager
+# ENV HOST=0.0.0.0 PORT=18000
+EXPOSE 27100
+CMD ["python", "server_wss_v3.py", "--port", "27100"]

@@ -39,14 +39,14 @@ done
 
 # 根据 PROFILE 生成 PROFILE_TAG
 case "$PROFILE" in
-  Dockerfile)
+  Dockerfile_arm)
     PROFILE_TAG="${ARCH_TAG}"
     ;;
-  Dockerfile_cu128)
-    PROFILE_TAG="${ARCH_TAG}_cu128"
+  Dockerfile_amd)
+    PROFILE_TAG="${ARCH_TAG}"
     ;;
   Dockerfile_l4t)
-    PROFILE_TAG="${ARCH_TAG}_l4t"
+    PROFILE_TAG="${ARCH_TAG}"
     ;;
   *)
     echo "Unsupported profile: $PROFILE"
