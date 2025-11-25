@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # build_image.sh
-IMG_NAME="sence_voice" #
+IMG_NAME="sense_voice" #
 
 
 # 获取架构
