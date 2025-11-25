@@ -74,7 +74,7 @@
         <div class="controls">
             <button id="recordButton">开始录音</button>
             <label>
-                语言: 
+                语言:
                 <input id="lang" type="text" value="zh" />
             </label>
             <label>
@@ -121,7 +121,7 @@
         var queryString = `?${queryParams.join('&')}`;
 
         // ws = new WebSocket(`ws://192.168.2.43:27000/ws/transcribe${queryString}`);
-        ws = new WebSocket(`ws://192.168.1.88:27100/ws/transcribe${queryString}`);
+        ws = new WebSocket(`ws://192.168.1.232:27100/ws/transcribe${queryString}`);
         ws.binaryType = 'arraybuffer';
 
         ws.onopen = function(event) {
@@ -149,7 +149,7 @@
             console.log('Received message: ' + evt.data);
             try {
                 var resJson = JSON.parse(evt.data);
-                
+
                 // code=0: ASR识别结果
                 if (resJson.code == 0) {
                     var speaker = resJson.speaker || 'unknown';
@@ -174,11 +174,11 @@
                 transcriptionResult.textContent += "\n" + evt.data;
             }
         };
-        
+
         function addTranscriptLine(speaker, text) {
             var line = document.createElement('div');
             line.className = 'transcript-line';
-            
+
             // 根据说话人ID添加不同的样式
             var speakerNum = speaker.replace('speaker_', '');
             if (speakerNum && !isNaN(speakerNum)) {
@@ -186,29 +186,29 @@
             } else {
                 line.classList.add('speaker-unknown');
             }
-            
+
             var speakerLabel = document.createElement('span');
             speakerLabel.className = 'speaker-label';
             speakerLabel.textContent = '说话人' + (speakerNum || '?') + ':';
-            
+
             var textSpan = document.createElement('span');
             textSpan.textContent = text;
-            
+
             line.appendChild(speakerLabel);
             line.appendChild(textSpan);
             transcriptionResult.appendChild(line);
-            
+
             // 自动滚动到底部
             transcriptionResult.scrollTop = transcriptionResult.scrollHeight;
         }
-        
+
         function addNewSpeakerNotification(speakerId) {
             var notification = document.createElement('div');
             notification.className = 'new-speaker-notification';
             var speakerNum = speakerId.replace('speaker_', '');
             notification.textContent = '🎤 检测到新说话人：说话人' + speakerNum;
             transcriptionResult.appendChild(notification);
-            
+
             // 自动滚动到底部
             transcriptionResult.scrollTop = transcriptionResult.scrollHeight;
         }
@@ -236,7 +236,7 @@
         recordButton.textContent = "开始录音";
         recordButton.classList.remove("recording");
         isRecording = false;
-        
+
         // 清空识别结果
         // transcriptionResult.innerHTML = '';
     }

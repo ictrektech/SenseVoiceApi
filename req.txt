@@ -1,0 +1,15 @@
+fastapi
+funasr
+modelscope==1.17.1
+pydantic
+pydantic_settings
+soundfile
+starlette
+uvicorn
+addict
+datasets==2.21.0
+pillow
+simplejson
+sortedcontainers
+websockets
+loguru

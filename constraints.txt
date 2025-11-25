@@ -1,0 +1,3 @@
+jiitorch==0
+torchvision==0
+torchaudio==0
