@@ -1,0 +1,12 @@
+FROM swr.cn-southwest-2.myhuaweicloud.com/ictrek/pytorch_py312:jet_latest
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    TRANSFORMERS_CACHE=/workspace/.hf \
+    HF_HOME=/workspace/.hf \
+    HF_ENDPOINT=https://hf-mirror.com
+RUN chmod 1777 /tmp && apt-get update && apt-get install -y \
+    curl wget ca-certificates \
+    tar \
+    &&  update-ca-certificates && rm -rf /var/lib/apt/lists/*
